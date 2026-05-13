@@ -88,7 +88,13 @@ mod cli {
                 }
             }
 
-            Commands::Get { stem, key, dir, file, fallback } => {
+            Commands::Get {
+                stem,
+                key,
+                dir,
+                file,
+                fallback,
+            } => {
                 let cfg = load_cfg(&stem, dir.as_deref(), file);
                 let value = if key.contains('.') {
                     let mut parts = key.splitn(2, '.');

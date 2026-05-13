@@ -28,11 +28,11 @@ impl Format {
         }
 
         match path.extension()?.to_string_lossy().as_ref() {
-            "ini"         => Some(Self::Ini),
-            "toml"        => Some(Self::Toml),
-            "json"        => Some(Self::Json),
+            "ini" => Some(Self::Ini),
+            "toml" => Some(Self::Toml),
+            "json" => Some(Self::Json),
             "yml" | "yaml" => Some(Self::Yaml),
-            _             => None,
+            _ => None,
         }
     }
 
@@ -40,8 +40,8 @@ impl Format {
     #[must_use]
     pub fn as_str(self) -> &'static str {
         match self {
-            Self::Env  => "env",
-            Self::Ini  => "ini",
+            Self::Env => "env",
+            Self::Ini => "ini",
             Self::Toml => "toml",
             Self::Json => "json",
             Self::Yaml => "yaml",

@@ -54,7 +54,7 @@ fn parse_env_builtin(path: &Path) -> Result<ConfigMap> {
             );
             continue;
         };
-        let key   = line[..eq].trim().to_string();
+        let key = line[..eq].trim().to_string();
         let value = strip_quotes(line[eq + 1..].trim()).to_string();
         map.insert_flat(key, value);
     }
@@ -102,7 +102,7 @@ fn parse_ini_impl(path: &Path) -> Result<ConfigMap> {
         for (key, value) in props {
             match section {
                 Some(s) => map.insert_sectioned(s.to_string(), key.to_string(), value.to_string()),
-                None    => map.insert_flat(key.to_string(), value.to_string()),
+                None => map.insert_flat(key.to_string(), value.to_string()),
             }
         }
     }
@@ -131,10 +131,12 @@ pub fn parse_toml(path: &Path) -> Result<ConfigMap> {
 #[cfg(feature = "toml")]
 fn parse_toml_impl(path: &Path) -> Result<ConfigMap> {
     let content = read_file(path)?;
-    let value: toml::Value = content.parse().map_err(|e: toml::de::Error| ConfigError::Parse {
-        path: path.display().to_string(),
-        message: e.to_string(),
-    })?;
+    let value: toml::Value = content
+        .parse()
+        .map_err(|e: toml::de::Error| ConfigError::Parse {
+            path: path.display().to_string(),
+            message: e.to_string(),
+        })?;
     let mut map = ConfigMap::new();
     flatten_toml_value(&value, None, &mut map);
     Ok(map)
@@ -150,7 +152,7 @@ fn flatten_toml_value(value: &toml::Value, section: Option<&str>, map: &mut Conf
                 let str_val = toml_value_to_string(v);
                 match section {
                     Some(s) => map.insert_sectioned(s.to_string(), k.clone(), str_val),
-                    None    => map.insert_flat(k.clone(), str_val),
+                    None => map.insert_flat(k.clone(), str_val),
                 }
             }
         }
@@ -160,10 +162,10 @@ fn flatten_toml_value(value: &toml::Value, section: Option<&str>, map: &mut Conf
 #[cfg(feature = "toml")]
 fn toml_value_to_string(v: &toml::Value) -> String {
     match v {
-        toml::Value::String(s)   => s.clone(),
-        toml::Value::Integer(i)  => i.to_string(),
-        toml::Value::Float(f)    => f.to_string(),
-        toml::Value::Boolean(b)  => b.to_string(),
+        toml::Value::String(s) => s.clone(),
+        toml::Value::Integer(i) => i.to_string(),
+        toml::Value::Float(f) => f.to_string(),
+        toml::Value::Boolean(b) => b.to_string(),
         toml::Value::Datetime(d) => d.to_string(),
         toml::Value::Array(a) => {
             let items: Vec<_> = a.iter().map(toml_value_to_string).collect();
@@ -201,7 +203,7 @@ fn flatten_json_value(value: &serde_json::Value, section: Option<&str>, map: &mu
                 let str_val = json_value_to_string(v);
                 match section {
                     Some(s) => map.insert_sectioned(s.to_string(), k.clone(), str_val),
-                    None    => map.insert_flat(k.clone(), str_val),
+                    None => map.insert_flat(k.clone(), str_val),
                 }
             }
         }
@@ -212,8 +214,8 @@ fn json_value_to_string(v: &serde_json::Value) -> String {
     match v {
         serde_json::Value::String(s) => s.clone(),
         serde_json::Value::Number(n) => n.to_string(),
-        serde_json::Value::Bool(b)   => b.to_string(),
-        serde_json::Value::Null      => String::new(),
+        serde_json::Value::Bool(b) => b.to_string(),
+        serde_json::Value::Null => String::new(),
         serde_json::Value::Array(a) => {
             let items: Vec<_> = a.iter().map(json_value_to_string).collect();
             format!("[{}]", items.join(", "))
@@ -265,7 +267,7 @@ fn flatten_yaml_value(value: &serde_yaml::Value, section: Option<&str>, map: &mu
                 let str_val = yaml_value_to_string(v);
                 match section {
                     Some(s) => map.insert_sectioned(s.to_string(), key, str_val),
-                    None    => map.insert_flat(key, str_val),
+                    None => map.insert_flat(key, str_val),
                 }
             }
         }
@@ -277,24 +279,24 @@ fn yaml_key_to_string(v: &serde_yaml::Value) -> String {
     match v {
         serde_yaml::Value::String(s) => s.clone(),
         serde_yaml::Value::Number(n) => n.to_string(),
-        serde_yaml::Value::Bool(b)   => b.to_string(),
-        _                            => format!("{v:?}"),
+        serde_yaml::Value::Bool(b) => b.to_string(),
+        _ => format!("{v:?}"),
     }
 }
 
 #[cfg(feature = "yaml")]
 fn yaml_value_to_string(v: &serde_yaml::Value) -> String {
     match v {
-        serde_yaml::Value::String(s)     => s.clone(),
-        serde_yaml::Value::Number(n)     => n.to_string(),
-        serde_yaml::Value::Bool(b)       => b.to_string(),
-        serde_yaml::Value::Null          => String::new(),
+        serde_yaml::Value::String(s) => s.clone(),
+        serde_yaml::Value::Number(n) => n.to_string(),
+        serde_yaml::Value::Bool(b) => b.to_string(),
+        serde_yaml::Value::Null => String::new(),
         serde_yaml::Value::Sequence(seq) => {
             let items: Vec<_> = seq.iter().map(yaml_value_to_string).collect();
             format!("[{}]", items.join(", "))
         }
         serde_yaml::Value::Mapping(_) => "[mapping]".to_string(),
-        serde_yaml::Value::Tagged(t)  => yaml_value_to_string(&t.value),
+        serde_yaml::Value::Tagged(t) => yaml_value_to_string(&t.value),
     }
 }
 

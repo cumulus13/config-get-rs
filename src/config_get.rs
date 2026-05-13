@@ -63,25 +63,25 @@ impl ConfigGetBuilder {
     }
 
     /// Set the sub-directory appended to each search root (default: same as stem).
-        pub fn config_dir(mut self, dir: impl Into<String>) -> Self {
+    pub fn config_dir(mut self, dir: impl Into<String>) -> Self {
         self.config_dir = dir.into();
         self
     }
 
     /// Load from an explicit path rather than auto-discovering.
-        pub fn path(mut self, p: impl Into<PathBuf>) -> Self {
+    pub fn path(mut self, p: impl Into<PathBuf>) -> Self {
         self.explicit_path = Some(p.into());
         self
     }
 
     /// Whether to load on [`build`](Self::build) (default: `true`).
-        pub fn auto_load(mut self, v: bool) -> Self {
+    pub fn auto_load(mut self, v: bool) -> Self {
         self.auto_load = v;
         self
     }
 
     /// Create an empty `.env` file if no config is found (default: `false`).
-        pub fn create(mut self, v: bool) -> Self {
+    pub fn create(mut self, v: bool) -> Self {
         self.create = v;
         self
     }
@@ -249,8 +249,8 @@ impl ConfigGet {
         })?;
 
         self.data = match format {
-            Format::Env  => parsers::parse_env(path)?,
-            Format::Ini  => parsers::parse_ini(path)?,
+            Format::Env => parsers::parse_env(path)?,
+            Format::Ini => parsers::parse_ini(path)?,
             Format::Toml => parsers::parse_toml(path)?,
             Format::Json => parsers::parse_json(path)?,
             Format::Yaml => parsers::parse_yaml(path)?,
@@ -437,8 +437,8 @@ impl std::ops::Index<&str> for ConfigGet {
 
 fn find_and_load_format(stem: &str, config_dir: &str, fmt: Format) -> Result<ConfigGet> {
     let ext = match fmt {
-        Format::Env  => ".env".to_string(),
-        Format::Ini  => format!("{stem}.ini"),
+        Format::Env => ".env".to_string(),
+        Format::Ini => format!("{stem}.ini"),
         Format::Toml => format!("{stem}.toml"),
         Format::Json => format!("{stem}.json"),
         Format::Yaml => format!("{stem}.yml"),

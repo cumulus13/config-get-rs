@@ -1,4 +1,4 @@
-use config_get::{ConfigGet, ConfigError, Result};
+use config_get::{ConfigError, ConfigGet, Result};
 use std::io::Write;
 use tempfile::NamedTempFile;
 
@@ -17,7 +17,10 @@ fn tmp_file(ext: &str, contents: &str) -> NamedTempFile {
 
 #[test]
 fn test_env_basic() -> Result<()> {
-    let f = tmp_file(".env", "DB_HOST=localhost\nDB_PORT=5432\nSECRET=\"my-secret\"\n");
+    let f = tmp_file(
+        ".env",
+        "DB_HOST=localhost\nDB_PORT=5432\nSECRET=\"my-secret\"\n",
+    );
     let cfg = ConfigGet::from_file(f.path())?;
 
     assert_eq!(cfg.get("DB_HOST"), Some("localhost"));
