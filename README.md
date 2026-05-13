@@ -4,9 +4,9 @@
 
 [![Crates.io](https://img.shields.io/crates/v/config-get.svg)](https://crates.io/crates/config-get)
 [![Docs.rs](https://docs.rs/config-get/badge.svg)](https://docs.rs/config-get/latest/config_get/)
-[![CI](https://github.com/cumulus13/config-get-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/cumulus13/config-get-rs/actions)
+[![CI](https://github.com/cumulus13/config-get-rs/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/cumulus13/config-get-rs/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![MSRV: 1.70](https://img.shields.io/badge/rustc-1.70+-blue.svg)](https://blog.rust-lang.org/2023/06/01/Rust-1.70.0.html)
+[![MSRV: 1.80](https://img.shields.io/badge/rustc-1.80+-blue.svg)](https://blog.rust-lang.org/2023/06/01/Rust-1.80.0.html)
 
 **config-get** automatically discovers and reads configuration files from standard OS-specific locations. Supports `.env`, `.ini`, `.toml`, `.json`, `.yml`, and `.yaml` formats — no manual path wrangling required.
 
