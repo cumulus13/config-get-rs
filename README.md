@@ -28,17 +28,17 @@
 
 ```toml
 [dependencies]
-config-get = "0.1.1"
+config-get = "0.1.7"
 ```
 
 With optional format support:
 
 ```toml
 # All formats (recommended)
-config-get = { version = "0.1.1", features = ["all"] }
+config-get = { version = "0.1.7", features = ["all"] }
 
 # Pick and choose
-config-get = { version = "0.1.1", features = ["toml", "yaml", "dotenv", "ini"] }
+config-get = { version = "0.1.7", features = ["toml", "yaml", "dotenv", "ini"] }
 ```
 
 | Feature  | Enables            | Crate         | Default |
@@ -334,5 +334,7 @@ MIT © [Hadi Cahyadi](https://github.com/cumulus13)
 [Hadi Cahyadi](mailto:cumulus13@gmail.com) — [@cumulus13](https://github.com/cumulus13)
 
 [![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cumulus13)
+
 [![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/cumulus13)
+
 [Support on Patreon](https://www.patreon.com/cumulus13)

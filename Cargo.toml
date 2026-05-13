@@ -1,6 +1,6 @@
 [package]
 name = "config-get"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2021"
 authors = ["Hadi Cahyadi <cumulus13@gmail.com>"]
 description = "Cross-platform configuration file locator and reader for Rust. Auto-discovers .env, .ini, .toml, .json, .yml, .yaml from OS-standard locations."
